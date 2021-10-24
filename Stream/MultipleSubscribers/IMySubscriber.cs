@@ -3,16 +3,12 @@ using Steeltoe.Stream.Attributes;
 
 namespace MultipleSubscribers
 {
-  public interface IMySubscriber : IMySubscriberSink
+  public interface IMySubscriber
   {
+    [Input]
+    ISubscribableChannel EventConsumers { get; }
 
-  }
-
-  public interface IMySubscriberSink
-  {
-    const string INPUT = "input";
-
-    [Input(INPUT)]
-    ISubscribableChannel Input { get; }
+    [Output]
+    IMessageChannel EventProducers { get; }
   }
 }

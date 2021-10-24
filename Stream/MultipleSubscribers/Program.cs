@@ -9,8 +9,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MultipleSubscribers;
 using Steeltoe.Messaging;
-using Steeltoe.Messaging.Core;
-using Steeltoe.Stream.Binding;
 using Steeltoe.Stream.StreamHost;
 
 var cts = new CancellationTokenSource();
@@ -50,8 +48,8 @@ var subscriber2Host = StreamHost
   .UseEnvironment("Development")
   .Build();
 
-var channelResolver = subscriber1Host.Services.GetService<IDestinationResolver<IMessageChannel>>() as BinderAwareChannelResolver;
-if (channelResolver is null) throw new Exception("Could not find resolver");
+var messageChannel = subscriber1Host.Services.GetService<IMySubscriber>();
+if (messageChannel is null) throw new Exception("Could not find message channel");
 
 logger.LogInformation("Starting subscriber 1");
 await subscriber1Host.StartAsync(cts.Token);
@@ -60,17 +58,15 @@ logger.LogInformation("Starting subscriber 2");
 await subscriber2Host.StartAsync(cts.Token);
 
 logger.LogInformation("Cancelling token in just a few seconds");
-cts.CancelAfter(TimeSpan.FromSeconds(200));
-
-var messageChannel = channelResolver.ResolveDestination(IMySubscriberSink.INPUT);
+cts.CancelAfter(TimeSpan.FromSeconds(8));
 
 logger.LogInformation("Sending a message");
 var outgoingMessage = Message.Create(new DomainEvent("1234", "asdf"), new Dictionary<string, object>(){{"x-request-id",Guid.NewGuid().ToString()}});
-await messageChannel.SendAsync(outgoingMessage, cts.Token);
+await messageChannel.EventProducers.SendAsync(outgoingMessage, cts.Token);
 
 logger.LogInformation("Sending another message");
 outgoingMessage = Message.Create(new DomainEvent("6789", "hjkl"), new Dictionary<string, object>(){{"x-request-id",Guid.NewGuid().ToString()}});
-await messageChannel.SendAsync(outgoingMessage, cts.Token);
+await messageChannel.EventProducers.SendAsync(outgoingMessage, cts.Token);
 
 logger.LogInformation("Waiting for token cancellation");
 while(!cts.Token.IsCancellationRequested){}

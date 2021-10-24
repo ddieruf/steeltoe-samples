@@ -13,7 +13,7 @@ namespace MultipleSubscribers
       _logger = logger;
     }
 
-    [StreamListener(IMySubscriberSink.INPUT)]
+    [StreamListener("EventConsumers")]
     public void Handle(DomainEvent domainEvent)
     {
       _logger.LogInformation("Subscriber 1 found event {@Event}", domainEvent);
