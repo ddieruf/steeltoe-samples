@@ -58,6 +58,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudDataflowLogSinkK8s", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudDataflowToUpperProcessorK8s", "CloudDataFlowToUpperProcessorK8s\CloudDataflowToUpperProcessorK8s.csproj", "{176FFB6B-C7AC-418A-B692-E83704C8FD98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleSubscribers", "MultipleSubscribers\MultipleSubscribers.csproj", "{C960B7F2-9612-49EF-9FDC-31923AE19585}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,10 @@ Global
 		{176FFB6B-C7AC-418A-B692-E83704C8FD98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{176FFB6B-C7AC-418A-B692-E83704C8FD98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{176FFB6B-C7AC-418A-B692-E83704C8FD98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C960B7F2-9612-49EF-9FDC-31923AE19585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C960B7F2-9612-49EF-9FDC-31923AE19585}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C960B7F2-9612-49EF-9FDC-31923AE19585}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C960B7F2-9612-49EF-9FDC-31923AE19585}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
