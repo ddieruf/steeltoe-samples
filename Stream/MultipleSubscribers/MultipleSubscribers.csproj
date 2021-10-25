@@ -12,7 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="appsettings.json">
+      <None Update="appsettings.Subscriber1.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Subscriber2.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
